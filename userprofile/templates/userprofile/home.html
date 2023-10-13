@@ -1,0 +1,83 @@
+<!-- userprofile/templates/userprofile/home.html -->
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Home</title>
+    <!-- Link to Bootstrap CSS via CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Noran Soft</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% for  %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        {% if user.is_authenticated %}
+            <!-- Professional User Profile Card -->
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{% static 'userprofile/image/images.jpeg' %}" class="card-img" alt="Profile Image">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Hello, <h1>{{ user.username }}</h1></h5>
+                            <p class="card-text">Email: {{ user.email }}</p>
+                            <p class="card-text">Address: {{ user.userprofile.address }}</p>
+                            <p class="card-text">Phone: {{ user.userprofile.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button to view active users -->
+            <button id="viewActiveUsers" class="btn btn-primary">View Active Users</button>
+
+            <!-- Active Users Section (Initially hidden) -->
+            <div id="activeUsersSection" style="display: none;">
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Active Users</h5>
+                        <ul class="list-group">
+                                <li class="list-group-item">{{ user.username }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('viewActiveUsers').addEventListener('click', function () {
+            var activeUsersSection = document.getElementById('activeUsersSection');
+            activeUsersS~ection.style.display = 'block';
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+~
